@@ -35,16 +35,16 @@ jobs:
 
       - name: Terraform Validate
         id: validate
-        run: terraform -chdir=./ validate -no-color
+        run: terraform -chdir=./examples/simple validate -no-color
 
       - name: Terraform Plan
         id: plan
-        run: terraform -chdir=./ plan 
+        run: terraform -chdir=./examples/simple plan 
         env:
           TF_VAR_snowflake_private_key: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
 
       - name: Terraform Apply
         id: apply
-        run: terraform -chdir=./ apply -auto-approve
+        run: terraform -chdir=./examples/simple apply -auto-approve
         env:
           TF_VAR_snowflake_private_key: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
