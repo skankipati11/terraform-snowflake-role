@@ -7,6 +7,8 @@ module "snowflake_role" {
 
   name = "SIMPLE_ROLE"
 
+  snowflake_private_key  = var.snowflake_private_key
+
   account_grants = [
     {
       privileges = ["CREATE DATABASE"]
