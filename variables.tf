@@ -206,3 +206,9 @@ variable "context_templates" {
   type        = map(string)
   default     = {}
 }
+
+variable "snowflake_private_key" {
+  type        = string
+  description = "Private key used to access Snowflake"
+  sensitive   = true
+}
