@@ -1,0 +1,1 @@
+Test Terraform Snowflake Role simple
