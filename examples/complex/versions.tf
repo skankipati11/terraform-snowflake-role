@@ -1,10 +1,10 @@
 terraform {
   required_providers {
     snowflake = {
-      source  = "snowflakedb/snowflake"
+      source = "snowflakedb/snowflake"
     }
     context = {
-      source  = "cloudposse/context"      
+      source = "cloudposse/context"
     }
   }
 }

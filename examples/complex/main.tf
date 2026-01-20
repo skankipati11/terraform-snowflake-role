@@ -58,7 +58,7 @@ resource "snowflake_dynamic_table" "this" {
 
 module "snowflake_role_1" {
   source = "../../"
-  
+
   snowflake_private_key = var.snowflake_private_key
 
   name              = "SAMPLE_TEST_1"
@@ -195,7 +195,7 @@ module "snowflake_role_2" {
 module "snowflake_role_3" {
   source = "../../"
 
-  snowflake_private_key = var.snowflake_private_key  
+  snowflake_private_key = var.snowflake_private_key
 
 
   name = "sample-test-3"
