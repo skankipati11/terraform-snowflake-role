@@ -1,0 +1,50 @@
+name: "STAGING ENV: Snowflake Terraform Role Workflow"
+
+on: 
+  push:
+    branches: 
+      - prod
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-terraform-staging:
+    name: "Plan & Deploy Terraform plan on Staging"
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      
+      - name: Terraform Init
+        id: init
+        run: terraform -chdir=./examples/complex init -upgrade
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform -chdir=./examples/complex fmt -recursive -check
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform -chdir=./examples/complex validate -var-file=fixtures.tfvars -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform -chdir=./examples/complex plan -var-file=fixtures.tfvars
+        env:
+          TF_VAR_snowflake_private_key: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform -chdir=./examples/complex apply -var-file=fixtures.tfvars -auto-approve
+        env:
+          TF_VAR_snowflake_private_key: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
