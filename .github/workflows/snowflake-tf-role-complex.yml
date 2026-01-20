@@ -27,7 +27,7 @@ jobs:
       
       - name: Terraform Init
         id: init
-        run: terraform -chdir=./examples/complex init -upgrade
+        run: terraform -chdir=./examples/complex init -var-file=fixtures.tfvars -upgrade
 
       - name: Terraform Format
         id: fmt
